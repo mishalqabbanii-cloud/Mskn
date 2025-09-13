@@ -4,7 +4,7 @@ import { ActivityFeed } from "@/components/ActivityFeed"
 import { Users, CreditCard, AlertTriangle, CheckCircle } from "lucide-react"
 
 export default function Dashboard() {
-  //todo: remove mock functionality
+  
   const kpiData = {
     totalUsers: 1234,
     activeSubscriptions: 856,
@@ -67,7 +67,7 @@ export default function Dashboard() {
         </p>
       </div>
       
-      {/* KPI Cards */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
         <KPICard
           title="Total Users"

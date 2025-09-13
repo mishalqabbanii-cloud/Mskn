@@ -59,7 +59,7 @@ export function DataTable({
 
     // Apply column filters
     const matchesFilters = Object.entries(filters).every(([key, value]) => 
-      value === "" || String(item[key]) === value
+      value === "" || value === "_all" || String(item[key]) === value
     )
 
     return matchesSearch && matchesFilters
@@ -112,14 +112,14 @@ export function DataTable({
             {filterOptions.map(filter => (
               <Select
                 key={filter.key}
-                value={filters[filter.key] || ""}
-                onValueChange={(value) => setFilters(prev => ({ ...prev, [filter.key]: value }))}
+                value={filters[filter.key] || "_all"}
+                onValueChange={(value) => setFilters(prev => ({ ...prev, [filter.key]: value === "_all" ? "" : value }))}
               >
                 <SelectTrigger className="w-[150px]" data-testid={`select-filter-${filter.key}`}>
                   <SelectValue placeholder={filter.label} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All {filter.label}</SelectItem>
+                  <SelectItem value="_all">All {filter.label}</SelectItem>
                   {filter.options.map(option => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.label}
