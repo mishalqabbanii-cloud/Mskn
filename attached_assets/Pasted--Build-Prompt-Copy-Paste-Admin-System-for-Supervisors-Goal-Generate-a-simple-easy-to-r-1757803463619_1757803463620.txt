@@ -1,0 +1,267 @@
+# Build Prompt (Copy–Paste) — Admin System for Supervisors
+
+**Goal:** Generate a simple, easy-to-read **Admin System** that manages **all users** and covers **Dashboard**, **Subscriptions**, and **Maintenance**. The code must use **only HTML, CSS, and vanilla JavaScript** (no frameworks, no build tools). Keep files small, names clear, and add short comments so non‑technical people can read it.
+
+---
+
+## Constraints
+
+* **No frameworks** (no React/Vue/Bootstrap/Tailwind). Use plain HTML/CSS/JS only.
+* **No bundlers** (no Webpack/Vite). Just static files.
+* **Data layer:** Start with in‑memory arrays. Also add optional **localStorage** save/load so the demo persists.
+* **Accessibility:** Use labels, keyboard focus, aria attributes; sufficient color contrast.
+* **Responsiveness:** Simple fluid layout (CSS Grid/Flex). Works well on desktop and mobile.
+
+---
+
+## File Structure
+
+```
+admin/
+  index.html            // Dashboard
+  users.html            // Manage all users
+  subscriptions.html    // Manage subscription plans & user subscriptions
+  maintenance.html      // Maintenance tickets
+  css/
+    styles.css          // Shared styles (variables, layout, tables, forms)
+  js/
+    app.js              // Shared helpers (storage, toast, modal, table utils)
+    dashboard.js        // Logic for index.html
+    users.js            // Logic for users.html
+    subscriptions.js    // Logic for subscriptions.html
+    maintenance.js      // Logic for maintenance.html
+  assets/
+    logo.svg
+```
+
+---
+
+## Shared Design (styles.css)
+
+* Define CSS variables for colors, spacing, radius, shadow.
+* Layout: simple top navbar + left sidebar (collapsible on mobile) + content area.
+* Components: `.card`, `.table`, `.btn`, `.btn-primary`, `.btn-outline`, `.badge`, `.input`, `.select`, `.modal`, `.toast`.
+* Tables: sticky header, striped rows, hover highlight. Use `white-space: nowrap;` for narrow columns.
+
+---
+
+## Shared JS (app.js)
+
+Implement simple utilities (well commented):
+
+* `store(key, value)` / `load(key, fallback)` using localStorage JSON.
+* `uid()` to generate simple ids.
+* `toast(message, type)` shows success/error banners.
+* `openModal(id)` / `closeModal(id)` toggles `.modal` with aria support and ESC to close.
+* `paginate(array, page, pageSize)` returns `{ items, totalPages }`.
+* `downloadCSV(filename, rowsArrayOfObjects)` for CSV export.
+* Seed data function `seedIfEmpty()` to populate sample users, plans, tickets.
+
+---
+
+## Data Models (plain JS objects)
+
+```js
+// users
+{ id, name, email, role, status, createdAt }
+// role: 'Supervisor' | 'Manager' | 'Viewer'
+// status: 'Active' | 'Disabled'
+
+// subscription plans
+{ id, name, priceSAR, period, features: ["..."], isActive }
+// period: 'Monthly' | 'Yearly'
+
+// userSubscriptions (link user to plan)
+{ id, userId, planId, startDate, endDate, status }
+// status: 'Active' | 'Expired' | 'Cancelled'
+
+// maintenance tickets
+{ id, title, description, priority, status, createdAt, updatedAt, assignedToUserId }
+// priority: 'Low' | 'Medium' | 'High'
+// status: 'Open' | 'In Progress' | 'Resolved'
+```
+
+---
+
+## Page 1 — **Dashboard** (index.html + dashboard.js)
+
+**UI:**
+
+* Header with app name and user avatar.
+* Cards row with KPIs:
+
+  * Total Users
+  * Active Subscriptions
+  * Tickets Open
+  * Tickets Resolved (last 30 days)
+* Two simple charts made with **pure HTML/CSS** (no chart library):
+
+  * Subscriptions by Plan (horizontal bar using div widths)
+  * Tickets by Status (stacked bar or 3 badges with counts)
+* Recent activity list (last 10 actions taken in other pages; kept in localStorage under `activityLog`).
+
+**Interactions:**
+
+* On load, call `seedIfEmpty()`, compute KPIs from localStorage, render.
+
+---
+
+## Page 2 — **Manage Users** (users.html + users.js)
+
+**Features:**
+
+* Table of all users with **search** (name/email), **role filter**, and **status filter**.
+* **Pagination** (page size 10/25/50) handled client-side.
+* **Create User** modal: name, email, role (Supervisor/Manager/Viewer), status (Active/Disabled).
+* **Edit** inline or modal.
+* **Disable/Enable** user (toggle status) with confirm.
+* **Delete** user (hard delete) with confirm.
+* **Export CSV** of current filtered list.
+
+**Validation:**
+
+* Name required (min 2 chars), email format check, unique email, role required.
+* Show inline red messages next to fields.
+
+**Activity Log:**
+
+* Push messages like `"Created user Mohammed (Manager)"` with timestamp.
+
+---
+
+## Page 3 — **Subscriptions** (subscriptions.html + subscriptions.js)
+
+**Tabs:**
+
+1. **Plans**
+
+   * Table of plans: name, SAR price, period (Monthly/Yearly), active badge.
+   * Create/Edit plan modal (name, price number ≥ 0, period, features textarea split by lines, active checkbox).
+   * Enable/Disable plan, Delete plan (guard if in use).
+2. **User Subscriptions**
+
+   * Table: user, plan, start, end, status (Active/Expired/Cancelled).
+   * Assign plan to user (modal): pick user, plan, start date, auto-calc end date from period; status starts Active.
+   * Change plan (creates a new sub and closes the old as Cancelled; log activity).
+   * Cancel subscription, Mark as expired (buttons).
+
+**Computed:**
+
+* **Active Subscriptions** count shown at top.
+
+**Validation:**
+
+* Price must be numeric ≥ 0. Start < End. Prevent duplicate active subs per user.
+
+---
+
+## Page 4 — **Maintenance** (maintenance.html + maintenance.js)
+
+**Features:**
+
+* Table of tickets with search and filters (priority, status, assigned user).
+* Create ticket modal: title, description, priority (Low/Medium/High), assign to user (optional).
+* Update ticket: change status through stages **Open → In Progress → Resolved**.
+* Add note (append to a simple notes array stored in the ticket object, optional UI).
+* Reassign ticket to a different user.
+* Export CSV of tickets.
+
+**Quality of Life:**
+
+* Color badges for status & priority (e.g., High=red badge, Resolved=green badge).
+* Sort by createdAt / priority.
+
+---
+
+## Simple Markup Patterns
+
+**Tables**
+
+```html
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="user-rows"></tbody>
+</table>
+```
+
+**Modal**
+
+```html
+<div id="user-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="user-modal-title">
+  <div class="modal-content">
+    <h3 id="user-modal-title">Create User</h3>
+    <form id="user-form">
+      <!-- inputs here -->
+      <div class="modal-actions">
+        <button type="button" class="btn" onclick="closeModal('user-modal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+```
+
+---
+
+## Minimal JS Examples (users.js)
+
+```js
+const users = load('users', []);
+const table = document.getElementById('user-rows');
+
+function renderUsers(list) {
+  table.innerHTML = list.map(u => `
+    <tr>
+      <td>${u.name}</td>
+      <td>${u.email}</td>
+      <td><span class="badge">${u.role}</span></td>
+      <td><span class="badge ${u.status==='Active'?'success':'danger'}">${u.status}</span></td>
+      <td>
+        <button class="btn" onclick="editUser('${u.id}')">Edit</button>
+        <button class="btn btn-outline" onclick="toggleUser('${u.id}')">${u.status==='Active'?'Disable':'Enable'}</button>
+        <button class="btn btn-outline" onclick="removeUser('${u.id}')">Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+function addUser(e) {
+  e.preventDefault();
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  if (!name || name.length < 2) return toast('Name is required', 'error');
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return toast('Email is invalid', 'error');
+  if (users.find(u => u.email === email)) return toast('Email already exists', 'error');
+  users.push({ id: uid(), name, email, role: 'Manager', status: 'Active', createdAt: new Date().toISOString() });
+  store('users', users);
+  renderUsers(users);
+  toast('User created', 'success');
+  closeModal('user-modal');
+}
+```
+
+---
+
+## Acceptance Criteria
+
+1. **Dashboard:** shows KPIs (users count, active subs, ticket counts) and simple bar visuals using only HTML/CSS.
+2. **Users:** create, edit, disable/enable, delete; search, filter, paginate; export CSV.
+3. **Subscriptions:** manage plans and user subscriptions; prevent more than one active plan per user; change/cancel/expire; export CSV.
+4. **Maintenance:** create tickets, change status across stages, assign/reassign, search/filter/sort; export CSV.
+5. **Persistence:** all data persists across refresh via localStorage; include a **Reset Demo Data** button in Settings area of each page.
+6. **Clarity:** code commented, variables readable, no file exceeds \~300 lines if possible.
+
+---
+
+## Handover Notes
+
+* Add a simple **top nav** linking the four pages.
+* Each page loads its own JS file and `app.js`.
+* Keep strings ready for future i18n (wrap user‑visible strings in a tiny function `t(s)` that returns the same string for now).
