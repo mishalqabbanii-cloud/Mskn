@@ -2,6 +2,11 @@
 
 This repository hosts a mock property-management dashboard built with React, Vite, TypeScript, and Tailwind CSS. It is a self-contained front-end experience that simulates the core user flows (properties, tenants, contracts, dashboards) while backend services are under development.
 
+## Repository
+
+- Main repository: [https://github.com/mishalqabbanii-cloud/Mskn](https://github.com/mishalqabbanii-cloud/Mskn)
+  - Ensure you are signed in to GitHub with access to the `mishalqabbanii-cloud` organization.
+
 ## Project Structure
 
 ```
