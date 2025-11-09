@@ -1,0 +1,52 @@
+
+---
+description: React frontend + Node.js (Express) backend + PostgreSQL + Docker setup
+alwaysApply: true
+---
+
+# 🔧 Stack Configuration (Mskn Cloud)
+
+- **Frontend:** React + TypeScript
+  - Use functional components and hooks.
+  - Validate all user inputs (zod/yup).
+  - Escape dynamic content to prevent XSS.
+  - Keep components small, reusable, and clear.
+
+- **Backend:** Node.js + Express + Prisma + PostgreSQL
+  - Validate all requests with zod.
+  - Use Prisma ORM (parameterized queries).
+  - Centralize error handling (no raw stack traces in prod).
+  - Auth via JWT or session (hashed passwords, argon2/bcrypt).
+  - Required ENV vars:
+    - `DATABASE_URL=postgresql://<USER>:<PASSWORD>@db:5432/<DB_NAME>?schema=public`
+    - `PORT_API=4000`
+
+- **Docker:**
+  - Use Docker Compose to run services: `web`, `api`, `db`.
+  - Never commit `.env`, use `.env.sample` only.
+  - Add healthchecks for API and web containers.
+  - Example env:
+    - `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`
+    - `PORT_WEB`, `PORT_API`
+
+---
+
+# 🧠 Development Guidelines
+
+- Security-first: validate inputs, escape outputs, least privilege.
+- Never hardcode secrets or tokens.
+- Always use parameterized DB queries.
+- Add rate limiting and CORS restrictions.
+- Use CI to lint, type-check, and run tests.
+
+---
+
+# ⚙️ Output Format
+
+When generating or explaining code, always structure responses like this:
+
+1️⃣ **Intent:** What the feature does  
+2️⃣ **Design:** APIs, data flow, validation, and error handling  
+3️⃣ **Implementation:** React (frontend) + Node.js/Prisma (backend)  
+4️⃣ **Testing:** Unit/integration test plan  
+5️⃣ **Maintenance:** Notes for scaling or future updates

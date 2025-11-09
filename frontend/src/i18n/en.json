@@ -1,0 +1,378 @@
+{
+  "app": {
+    "name": "Mskn Cloud",
+    "tagline": "Mock control panel",
+    "description": "Test environment for managing properties, owners, tenants, and contracts before the backend is ready.",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "loading": "Loading mock data...",
+    "error": "Could not load mock data. Please try again."
+  },
+  "actions": {
+    "add": "Add",
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "login": "Log In",
+    "register": "Sign Up",
+    "viewAll": "View all",
+    "back": "Back",
+    "tryAgain": "Try again",
+    "update": "Update",
+    "logout": "Log out"
+  },
+  "messages": {
+    "successSave": "Saved successfully",
+    "successRegister": "Account created successfully. Please sign in.",
+    "successLogin": "Logged in successfully",
+    "newDataNotice": "This is mock data and is not linked to a real account.",
+    "loginFailed": "Invalid credentials (mock).",
+    "emptyState": "No data yet — start by adding the first record.",
+    "loading": "Loading...",
+    "error": "Something went wrong. Please try again.",
+    "deletedProperty": "Property removed",
+    "deletedTenant": "Tenant removed",
+    "deletedOwner": "Owner removed",
+    "deletedContract": "Contract removed",
+    "deletedRequest": "Maintenance request removed"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "properties": "Properties",
+    "tenants": "Tenants",
+    "owners": "Owners",
+    "contracts": "Contracts",
+    "maintenance": "Maintenance",
+    "settings": "Settings",
+    "logout": "Log out"
+  },
+  "auth": {
+    "register": {
+      "title": "Create an account",
+      "subtitle": "Enter your basic information to explore the mock system.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone number",
+      "role": "Role",
+      "password": "Password (mock)",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Log in"
+    },
+    "login": {
+      "title": "Log in",
+      "subtitle": "Use the mock email and password to continue.",
+      "email": "Email",
+      "password": "Password",
+      "remember": "Remember me",
+      "noAccount": "Don't have an account?",
+      "registerLink": "Create one now",
+      "processing": "Signing you in…"
+    }
+  },
+  "roles": {
+    "manager": "Property manager",
+    "owner": "Owner",
+    "tenant": "Tenant"
+  },
+  "dashboard": {
+    "manager": {
+      "title": "Manager dashboard",
+      "subtitle": "At-a-glance view of the mock portfolio.",
+      "kpis": {
+        "properties": "Total properties",
+        "occupied": "Occupied",
+        "vacant": "Vacant",
+        "tenants": "Tenants",
+        "maintenance": "Open maintenance"
+      },
+      "quickLinks": {
+        "title": "Quick actions",
+        "addProperty": "Add property",
+        "addTenant": "Add tenant",
+        "addContract": "Create contract"
+      }
+    },
+    "owner": {
+      "title": "Owner dashboard",
+      "subtitle": "Track your assets and active contracts.",
+      "properties": "My properties",
+      "contracts": "My contracts",
+      "revenue": "Annual rent summary",
+      "totalAnnualRent": "Total annual rent",
+      "activeContracts": "Active contracts",
+      "activeContractsLabel": "{count} active contracts",
+      "propertiesEmptyTitle": "No linked properties",
+      "propertiesEmptyDescription": "Link properties to this owner to surface them here.",
+      "contractsEmptyTitle": "No contracts yet",
+      "contractsEmptyDescription": "Create a contract to see its details in this dashboard."
+    },
+    "tenant": {
+      "title": "Tenant dashboard",
+      "subtitle": "Review your contracts and upcoming payments.",
+      "contracts": "My contracts",
+      "nextPayment": "Next payment",
+      "maintenance": "Maintenance requests",
+      "createRequest": "Create maintenance request",
+      "nextPaymentHelper": "Property: {property} • Due: {due}",
+      "noUpcomingPayments": "No upcoming payments at the moment",
+      "contractsCount": "Contracts",
+      "contractHelper": "Tenant: {name}",
+      "contractsEmptyTitle": "No active contracts",
+      "contractsEmptyDescription": "Once a contract is signed, it will surface here.",
+      "maintenanceEmptyTitle": "No maintenance requests",
+      "maintenanceEmptyDescription": "Create a new maintenance request to start tracking follow-up."
+    },
+    "state": {
+      "loading": "Loading indicators…",
+      "error": "Unable to load mock dashboard data."
+    }
+  },
+  "forms": {
+    "required": "This field is required",
+    "invalidEmail": "Email format is invalid",
+    "invalidPhone": "Phone number must be between 9 and 12 digits",
+    "passwordHint": "Any mock password works",
+    "invalidUrl": "Enter a valid URL that starts with http:// or https://",
+    "requiredHint": "Fields marked with * are required."
+  },
+  "properties": {
+    "subtitle": "Manage the property catalog with mock data before integration.",
+    "form": {
+      "titleCreate": "Add new property",
+      "titleEdit": "Edit property",
+      "description": "Only required fields are validated; everything else is optional.",
+      "name": "Property name",
+      "address": "Full address",
+      "type": "Property type",
+      "image": "Property image (optional)",
+      "imageHint": "Use a secure link (https://) to an image hosted on a trusted CDN.",
+      "status": "Current status",
+      "owner": "Linked owner (optional)",
+      "tenant": "Current tenant (optional)",
+      "rent": "Annual rent (optional)",
+      "notes": "Additional notes",
+      "requiredNote": "Fields marked with * are required."
+    },
+    "placeholders": {
+      "name": "e.g., Palm Tower – Unit 12",
+      "address": "City, district, street, unit number",
+      "type": "Apartment, villa, office…",
+      "image": "https://example.com/property.jpg",
+      "owner": "— No owner —",
+      "tenant": "— No tenant —",
+      "rent": "e.g., 65000",
+      "notes": "Additional context or access instructions"
+    },
+    "table": {
+      "title": "Properties",
+      "descriptionWithCount": "A total of {count} properties in the mock store.",
+      "descriptionEmpty": "No properties yet — add the first record above.",
+      "headers": {
+        "property": "Property",
+        "type": "Type",
+        "owner": "Owner",
+        "tenant": "Tenant",
+        "rent": "Rent",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "status": {
+      "available": "Available",
+      "occupied": "Occupied",
+      "maintenance": "Under maintenance"
+    },
+    "confirm": {
+      "title": "Delete property?",
+      "message": "Are you sure you want to remove \"{name}\" from the mock database?"
+    }
+  },
+  "tenants": {
+    "subtitle": "Capture mock tenant information without any real account linkage.",
+    "form": {
+      "titleCreate": "Add new tenant",
+      "titleEdit": "Edit tenant",
+      "description": "Validate only the required fields; everything else is optional.",
+      "name": "Full name",
+      "phone": "Mobile number",
+      "email": "Email (optional)",
+      "workplace": "Workplace (optional)",
+      "notes": "Additional notes",
+      "requiredNote": "Only the name and mobile number are required to save the record."
+    },
+    "placeholders": {
+      "name": "e.g., Fahad Al Saud",
+      "phone": "+9665xxxxxxx",
+      "email": "tenant@example.com",
+      "workplace": "Company or organization name",
+      "notes": "Relevant notes about the tenant"
+    },
+    "table": {
+      "title": "Tenants",
+      "descriptionWithCount": "{count} tenants saved in the mock store.",
+      "descriptionEmpty": "No tenants yet — add the first record.",
+      "headers": {
+        "tenant": "Tenant",
+        "contact": "Contact",
+        "properties": "Linked properties",
+        "actions": "Actions"
+      }
+    },
+    "confirm": {
+      "title": "Delete tenant?",
+      "message": "Do you want to remove \"{name}\" from the mock database?"
+    }
+  },
+  "owners": {
+    "subtitle": "Manage mock owner profiles and link them to properties.",
+    "form": {
+      "titleCreate": "Add new owner",
+      "titleEdit": "Edit owner",
+      "description": "Only the name and phone are required; everything else is optional.",
+      "name": "Owner name",
+      "phone": "Phone number",
+      "email": "Email (optional)",
+      "notes": "Notes",
+      "requiredNote": "Email and notes can remain empty."
+    },
+    "placeholders": {
+      "name": "e.g., Abdullah Al Sebaie",
+      "phone": "+9665xxxxxxx",
+      "email": "owner@example.com",
+      "notes": "Preferred contact channel, availability, etc."
+    },
+    "unknown": "Unknown owner",
+    "table": {
+      "title": "Owners",
+      "descriptionWithCount": "{count} owners saved in the mock store.",
+      "descriptionEmpty": "No owners yet — add one using the form.",
+      "headers": {
+        "owner": "Owner",
+        "contact": "Contact",
+        "properties": "Properties",
+        "actions": "Actions"
+      }
+    },
+    "confirm": {
+      "title": "Delete owner?",
+      "message": "Do you want to remove \"{name}\" from the mock database?"
+    }
+  },
+  "contracts": {
+    "subtitle": "Manage mock lease contracts without backend validation.",
+    "form": {
+      "titleCreate": "Add new contract",
+      "titleEdit": "Edit contract",
+      "description": "Select the related property and tenant, then set the basic terms.",
+      "property": "Property",
+      "propertyPlaceholder": "Select property",
+      "tenant": "Tenant",
+      "tenantPlaceholder": "Select tenant",
+      "startDate": "Start date",
+      "endDate": "End date (optional)",
+      "rentAmount": "Rent amount (SAR)",
+      "paymentCycle": "Payment cycle",
+      "status": "Contract status",
+      "notes": "Additional notes"
+    },
+    "placeholders": {
+      "rentAmount": "e.g., 60000",
+      "notes": "Custom clauses or remarks"
+    },
+    "status": {
+      "active": "Active",
+      "pending": "Pending signature",
+      "closed": "Closed"
+    },
+    "cycle": {
+      "monthly": "Monthly",
+      "quarterly": "Quarterly",
+      "yearly": "Yearly"
+    },
+    "table": {
+      "title": "Contracts",
+      "descriptionWithCount": "{count} contracts saved.",
+      "descriptionEmpty": "No contracts yet — add the first contract.",
+      "headers": {
+        "property": "Property",
+        "tenant": "Tenant",
+        "period": "Period",
+        "rent": "Rent",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "period": {
+        "fromTo": "From {start} to {end}",
+        "fromOpen": "From {start}"
+      }
+    },
+    "confirm": {
+      "title": "Delete contract?",
+      "message": "Do you want to remove this contract from the mock database?"
+    }
+  },
+  "maintenance": {
+    "subtitle": "Track maintenance requests within the mock dataset.",
+    "form": {
+      "titleCreate": "Create maintenance request",
+      "titleEdit": "Edit maintenance request",
+      "description": "Fill in the essential fields; everything else can remain blank.",
+      "property": "Property",
+      "propertyPlaceholder": "Select property",
+      "title": "Request title",
+      "reportedBy": "Reported by",
+      "status": "Status",
+      "priority": "Priority",
+      "assignedTo": "Assigned team (optional)",
+      "reportedAt": "Reported on",
+      "description": "Issue details",
+      "notes": "Internal notes"
+    },
+    "placeholders": {
+      "title": "e.g., Electrical outage",
+      "reportedBy": "Tenant or owner name",
+      "assignedTo": "Contractor or vendor",
+      "description": "Additional information about the issue",
+      "notes": "Internal follow-up notes"
+    },
+    "status": {
+      "open": "Open",
+      "in_progress": "In progress",
+      "closed": "Closed"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "table": {
+      "title": "Maintenance requests",
+      "descriptionWithCount": "{count} requests in the mock queue.",
+      "descriptionEmpty": "No maintenance requests yet.",
+      "headers": {
+        "request": "Request",
+        "status": "Status",
+        "priority": "Priority",
+        "details": "Details",
+        "actions": "Actions"
+      },
+      "unknownProperty": "Unknown property",
+      "noAssignee": "Not assigned yet",
+      "assignedTo": "Assigned to {assignee}"
+    },
+    "confirm": {
+      "title": "Delete maintenance request?",
+      "message": "Do you want to remove \"{title}\" from the mock database?"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "System configuration (coming soon).",
+    "emptyTitle": "No settings available yet",
+    "emptyDescription": "This page will host system configuration options once the backend integration is ready."
+  }
+}
+
