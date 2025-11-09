@@ -1,106 +1,62 @@
-# MSKN Cloud - Property Management System
+# Mskn Mock Frontend
 
-A comprehensive property management platform built with React, Vite, TypeScript, and Tailwind CSS.
-
-## Features
-
-### Property Manager
-- Property management (CRUD operations)
-- Tenant management
-- Lease management
-- Maintenance request handling
-- Payment tracking
-- Financial reports
-
-### Tenant
-- View lease information
-- Make payments
-- Submit maintenance requests
-- Access documents
-- View payment history
-
-### Property Owner
-- View owned properties
-- Financial reports and analytics
-- Tenant information
-- Property performance metrics
-
-## Tech Stack
-
-### Frontend
-- **React 18** - UI library
-- **Vite** - Build tool
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **React Router** - Navigation
-- **React Hook Form** - Form handling
-- **Zod** - Validation
-- **Axios** - HTTP client
-
-### Backend
-- **Node.js + Express** - REST API server
-- **PostgreSQL** - Database
-- **Drizzle ORM** - Type-safe database queries
-- **JWT** - Authentication
-- **Docker** - PostgreSQL containerization
-
-## Getting Started
-
-### Backend Setup (Required First)
-
-1. Navigate to backend directory:
-```bash
-cd backend
-```
-
-2. Run one-command setup:
-```bash
-npm run setup
-```
-
-This will:
-- Install dependencies
-- Start PostgreSQL with Docker
-- Set up database
-- Seed test data
-- Start the API server
-
-Or see `backend/README.md` for manual setup instructions.
-
-### Frontend Setup
-
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Start development server:
-```bash
-npm run dev
-```
-
-3. Access the application:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
-
-## Test Credentials
-
-After backend setup, you can login with:
-- **Manager**: `manager@mskn.com` / `password123`
-- **Tenant**: `tenant@mskn.com` / `password123`
-- **Owner**: `owner@mskn.com` / `password123`
+This repository hosts a mock property-management dashboard built with React, Vite, TypeScript, and Tailwind CSS. It is a self-contained front-end experience that simulates the core user flows (properties, tenants, contracts, dashboards) while backend services are under development.
 
 ## Project Structure
 
 ```
-src/
-├── components/     # Reusable UI components
-├── pages/          # Page components
-├── hooks/          # Custom React hooks
-├── services/       # API services
-├── types/          # TypeScript types
-├── utils/          # Utility functions
-├── contexts/       # React contexts (Auth, etc.)
-└── routes/         # Route definitions
+frontend/
+  ├── src/               # Application source code
+  ├── public/            # Static assets served by Vite
+  ├── dist/              # Production build output
+  ├── package.json       # Frontend dependencies and scripts
+  └── README.md          # Module-specific documentation
 ```
+
+> The root repository intentionally contains only the `frontend` workspace to keep the Git history focused on the active mock application.
+
+## Getting Started
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The development server runs on <http://localhost:5173>. All data is mock-only and stored in local React state; no external services are required.
+
+## Available Scripts
+
+- `npm run dev` – start the Vite dev server.
+- `npm run build` – type-check with TypeScript and produce a production build in `dist/`.
+- `npm run preview` – preview the production build locally.
+
+## Testing & Quality
+
+- TypeScript provides static type checks.
+- ESLint (configured in `frontend/eslint.config.js`) ensures code quality; run `npm run lint` if added in the future.
+- For production readiness, consider integrating unit tests (e.g., Vitest + React Testing Library) and end-to-end smoke tests.
+
+## Security Considerations
+
+This mock app runs entirely in the browser. Nonetheless, follow secure defaults:
+
+- Do not embed secrets in the codebase; use environment variables if backend integration is introduced.
+- Sanitize and validate all user input before sending it to any future API.
+- When integrating uploads, whitelist file types and enforce size limits.
+
+## Deployment
+
+1. Build the project: `npm run build`.
+2. Serve the generated `frontend/dist` directory with any static hosting solution (e.g., GitHub Pages, Netlify, Vercel, or an S3 bucket + CDN).
+
+## Maintenance Notes
+
+- Keep dependencies updated (`npm outdated` / `npm update`) to receive security patches.
+- Review accessibility, localization, and responsiveness when adding new UI features.
+- Update this README whenever the project structure or build requirements change.
+
+## License
+
+This project is currently unlicensed; add a LICENSE file if you intend to open-source it formally or share usage terms.
 
